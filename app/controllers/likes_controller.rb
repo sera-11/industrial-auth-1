@@ -2,6 +2,7 @@ class LikesController < ApplicationController
   before_action :set_like, only: %i[ show edit update destroy ]
 
   before_action :is_an_authorized_user, only: [:destroy, :create]
+  before_action {authorize @like || Like }
 
   def is_an_authorized_user
     if !@like.owner.private? || @like.owner == current_user || current_user.leaders.include?(@like.owner)

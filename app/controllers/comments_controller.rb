@@ -3,6 +3,8 @@ class CommentsController < ApplicationController
 
   before_action :is_an_authorized_user, only: [:destroy, :create]
 
+  before_action {authorize @comment || Comment }
+
   def is_an_authorized_user
     @photo = Photo.find(params.fetch(:comment).fetch(:photo_id))
     if @photo.owner.private? || @photo.owner != current_user || !current_user.leaders.include?(@photo.owner)
