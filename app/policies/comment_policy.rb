@@ -1,19 +1,20 @@
-# app/policies/photo_policy.rb
-
+# app/policies/comment_policy.rb
 class CommentPolicy
-  attr_reader :user, :photo
+  attr_reader :user, :comment
 
-  def initialize(user, photo)
+  def initialize(user, comment)
     @user = user
-    @photo = photo
+    @comment = comment
   end
 
-  # Our policy is that a photo should only be seen by the
-  # owner or followers of the owner, unless the owner is not 
-  # private in which case anyone can see it
-  def show?
-    user == photo.owner ||
-      !photo.owner.private? ||
-      photo.owner.followers.include?(user)
+  def destroy?
+    user == comment.author
   end
+
+   def create?
+    true
+   end
+
+
+
 end
