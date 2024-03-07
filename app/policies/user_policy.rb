@@ -13,4 +13,8 @@ class UserPolicy
      !user.private? || 
      user.followers.include?(current_user)
   end
+
+  def feed?
+    true
+  end
 end
