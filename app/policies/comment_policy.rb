@@ -11,10 +11,17 @@ class CommentPolicy
     user == comment.author
   end
 
-   def create?
-    true
-   end
+  def create?
+   true
+  end
 
+  def update?
+    user == @comment.author
+  end
+
+  def edit?
+    update?
+  end
 
 
 end
