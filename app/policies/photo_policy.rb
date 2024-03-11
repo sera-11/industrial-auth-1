@@ -16,4 +16,26 @@ class PhotoPolicy
       !photo.owner.private? ||
       photo.owner.followers.include?(user)
   end
+
+  def new?
+    true
+  end
+
+  def create?
+    new?
+  end
+
+  def destroy?
+    user == @photo.owner
+  end
+
+  def edit?
+    update?
+  end
+
+  def update? 
+    user == @photo.owner
+  end
+
+
 end
